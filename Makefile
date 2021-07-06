@@ -6,7 +6,7 @@
 #    By: aguerrer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/05 17:44:16 by aguerrer          #+#    #+#              #
-#    Updated: 2021/07/05 18:02:07 by aguerrer         ###   ########.fr        #
+#    Updated: 2021/07/06 20:04:52 by aguerrer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,9 +51,9 @@ $(MINLBX):
  
 # Compiling
 $(NAME): $(OBJ)
-	@echo "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧ Compiling... Wait a sec."
+	@echo "Compiling... Wait a sec."
 	@gcc $(OBJ) $(LNK) -lm -o $(NAME)
-	@echo "(•̀ᴗ•́)و $(NAME) generated!".
+	@echo "$(NAME) generated!".
 
 bonus: all
 
@@ -62,13 +62,13 @@ clean:
 	@rm -Rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MINLBX_DIR) clean
-	@echo "¯\_(ツ)_/¯ Objects removed!"
+	@echo "Objects removed!"
 	
 # fclean rule
 fclean: clean
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo "(╯°□°）╯︵ ┻━┻ $(NAME) removed!"
+	@echo "$(NAME) removed!"
  
  # re rule
  re: fclean all
