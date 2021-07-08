@@ -27,11 +27,11 @@ static void	put_pixel(t_fdf *fdf, int y, int z, double uvector)
 
 static void	draw_lines(t_fdf *fdf)
 {
-	double y;
-	double z;
-	double delta_y;
-	double delta_z;
-	double uvector;
+	double		y;
+	double		z;
+	double		delta_y;
+	double		delta_z;
+	double		uvector;
 
 	y = fdf->map.y0;
 	z = fdf->map.z0;
@@ -111,7 +111,7 @@ static void	draw_vertical(t_fdf *fdf, int y, int z)
 ** @v -> vertical
 */
 
-int			fdf_draw(t_fdf *fdf)
+int	fdf_draw(t_fdf *fdf)
 {
 	int		y;
 	int		z;

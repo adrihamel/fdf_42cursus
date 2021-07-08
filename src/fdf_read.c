@@ -19,12 +19,13 @@ static int	count_values(char *line)
 	}
 	return (len);
 }
+
 static int	count_lines(t_fdf *fdf, char *argv)
 {
-	int	fd;
-	int	len;
-	int	rows;
-	int	cols;
+	int		fd;
+	int		len;
+	int		rows;
+	int		cols;
 	char	*line;
 
 	fd = open(argv, O_RDONLY);
@@ -54,8 +55,8 @@ static int	count_lines(t_fdf *fdf, char *argv)
 
 static void	get_values(t_fdf *fdf, int y, int z, char *line)
 {
-	int	i;
-	char	**split;
+	int			i;
+	char		**split;
 
 	split = ft_strsplit(line, ' ');
 	if (split)
@@ -72,9 +73,9 @@ static void	get_values(t_fdf *fdf, int y, int z, char *line)
 
 void	fdf_read(char *argv, t_fdf *fdf)
 {
-	int	y;
-	int	z;
-	int	fd;
+	int		y;
+	int		z;
+	int		fd;
 	char	*line;
 
 	y = 0;
