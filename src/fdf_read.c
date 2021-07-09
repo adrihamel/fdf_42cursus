@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_read.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aguerrer <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/09 18:53:26 by aguerrer          #+#    #+#             */
+/*   Updated: 2021/07/09 19:07:52 by aguerrer         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
+
+static void	aux(int fd, int n)
+{
+	if (n == 1)
+	{
+		if (close(fd) < 0)
+			ft_puterror("Error closing file", 2);
+	}
+	else
+	{
+		if (fd < 0)
+			ft_puterror("Error opening file", 1);
+	}
+}
 
 static int	count_values(char *line)
 {
@@ -20,19 +46,14 @@ static int	count_values(char *line)
 	return (len);
 }
 
-static int	count_lines(t_fdf *fdf, char *argv)
+static int	count_lines(t_fdf *fdf, char *argv, int cols, int rows)
 {
 	int		fd;
 	int		len;
-	int		rows;
-	int		cols;
 	char	*line;
 
 	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-		ft_puterror("Error opening file", 1);
-	rows = 0;
-	cols = 0;
+	aux(fd, 2);
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (*line == '\0')
@@ -46,9 +67,9 @@ static int	count_lines(t_fdf *fdf, char *argv)
 			ft_puterror("Not a valid file", 4);
 		free(line);
 	}
-	if (close(fd) < 0)
-		ft_puterror("Error closing file", 2);
-	if (!(fdf->map.width = cols))
+	aux(fd, 1);
+	fdf->map.width = cols;
+	if (!(fdf->map.width))
 		ft_puterror("Not a valid file", 4);
 	return (rows);
 }
@@ -80,7 +101,7 @@ void	fdf_read(char *argv, t_fdf *fdf)
 
 	y = 0;
 	z = 0;
-	fdf->map.height = count_lines(fdf, argv);
+	fdf->map.height = count_lines(fdf, argv, 0, 0);
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		ft_puterror("Error opening file!", 1);
@@ -97,6 +118,5 @@ void	fdf_read(char *argv, t_fdf *fdf)
 		z += 1;
 		free(line);
 	}
-	if (close(fd) < 0)
-		ft_puterror("Error closing file", 2);
+	aux(fd, 1);
 }

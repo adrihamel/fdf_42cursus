@@ -6,7 +6,7 @@
 /*   By: aguerrer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:51:01 by aguerrer          #+#    #+#             */
-/*   Updated: 2021/07/06 19:45:30 by aguerrer         ###   ########.fr       */
+/*   Updated: 2021/07/09 18:30:26 by aguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	fdf_usage(char *argv0)
 	ft_putstr("Controls:\n");
 	ft_putstr("\t[ESC]			-> Exit the program.\n");
 	ft_putstr("\t[R]			-> Reset the map.\n");
-	ft_putstr("\t[M]			-> Colorize image fdf.\n");
+	ft_putstr("\t[C]			-> Colorize image fdf.\n");
 	ft_putstr("\t[B][N]			-> Zoom in and zoom out.\n");
 	ft_putstr("\t[J][K]			-> Spiky time.\n");
 	ft_putstr("\t[Space]			-> Change the camera (isocetric <-> plain).\n");
@@ -67,25 +67,25 @@ static int	fdf_keys(int keycode, t_fdf *fdf)
 		exit(0);
 	else if (keycode == KEY_ANSI_R)
 		reset_map(fdf);
-	else if (keycode == KEY_ANSI_M)
+	else if (keycode == KEY_ANSI_C)
 		random_color(fdf, 1);
-	else if (keycode == KEY_ANSI_B)
-		fdf->map.zoom += 1;
-	else if ((keycode == KEY_ANSI_N) && (fdf->map.zoom > MAX_ZOOM))
-		fdf->map.zoom -= 1;
-	else if ((keycode == KEY_ANSI_J) && (fdf->map.x_value < MAX_X))
+	else if (keycode == KEY_ANSI_N)
+		fdf->map.zoom += 3;
+	else if ((keycode == KEY_ANSI_B) && (fdf->map.zoom > MAX_ZOOM))
+		fdf->map.zoom -= 3;
+	else if ((keycode == KEY_ANSI_K) && (fdf->map.x_value < MAX_X))
 		fdf->map.x_value += 0.25;
-	else if ((keycode == KEY_ANSI_K) && (fdf->map.x_value > -MAX_X))
+	else if ((keycode == KEY_ANSI_J) && (fdf->map.x_value > -MAX_X))
 		fdf->map.x_value -= 0.25;
 	else if (keycode == KEY_SPACE)
 		random_color(fdf, 2);
-	else if (keycode == KEY_ANSI_W || keycode == KEY_UPARROW)
+	else if (keycode == KEY_ANSI_W)
 		fdf->map.coordinate_z += 5;
-	else if (keycode == KEY_ANSI_S || keycode == KEY_DOWNARROW)
+	else if (keycode == KEY_ANSI_S)
 		fdf->map.coordinate_z -= 5;
-	else if (keycode == KEY_ANSI_D || keycode == KEY_RIGHTARROW)
+	else if (keycode == KEY_ANSI_D)
 		fdf->map.coordinate_y -= 5;
-	else if (keycode == KEY_ANSI_A || keycode == KEY_LEFTARROW)
+	else if (keycode == KEY_ANSI_A)
 		fdf->map.coordinate_y += 5;
 	return (0);
 }
@@ -103,7 +103,7 @@ int	main(int argc, char *argv[])
 		reset_map(fdf);
 		fdf->mlx.init = mlx_init();
 		fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, \
-				TITLE(ft_remove_extension(argv[1])));
+			   	"fdf");
 		mlx_hook(fdf->mlx.win, 2, 3, fdf_keys, fdf);
 		mlx_loop_hook(fdf->mlx.init, fdf_draw, fdf);
 		mlx_loop(fdf->mlx.init);

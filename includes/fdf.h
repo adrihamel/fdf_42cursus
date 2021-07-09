@@ -6,7 +6,7 @@
 /*   By: aguerrer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:48:46 by aguerrer          #+#    #+#             */
-/*   Updated: 2021/07/06 19:59:55 by aguerrer         ###   ########.fr       */
+/*   Updated: 2021/07/09 18:58:56 by aguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # define MAGIC_ZOOM		(2)
 # define WIN_WIDTH		(1280)
 # define WIN_HEIGHT		(720)
-# define TITLE(file)	(ft_strjoin("fdf - ", file))
 
 /*
 ** FDF Structures
@@ -58,14 +57,14 @@
 ** @t_fdf   : nested structure that calls all of the other structures.
 */
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*init;
 	void	*win;
 	void	*img;
 }				t_mlx;
 
-typedef struct	s_image
+typedef struct s_image
 {
 	char	*data;
 	int		size;
@@ -73,7 +72,7 @@ typedef struct	s_image
 	int		bpp;
 }				t_image;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int		**values;
 	int		width;
@@ -91,14 +90,14 @@ typedef struct	s_map
 	double	angle_z;
 }				t_map;
 
-typedef struct	s_color
+typedef struct s_color
 {
 	int		red;
 	int		green;
 	int		blue;
 }				t_color;
 
-typedef struct	s_fdf
+typedef struct s_fdf
 {
 	t_mlx	mlx;
 	t_map	map;
@@ -112,5 +111,6 @@ typedef struct	s_fdf
 
 void			fdf_read(char *argv, t_fdf *fdf);
 int				fdf_draw(t_fdf *fdf);
+int				aux1(char *line, int len, int cols, int rows);
 
 #endif
