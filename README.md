@@ -4,6 +4,22 @@ Actual Status : finished
 
 Result : [![aguerrer's 42Project Score](https://badge42.herokuapp.com/api/project/aguerrer/FdF)](https://github.com/JaeSeoKim/badge42)
 
+### Controls
+
+`[ESC]			-> Exit the program`
+
+`[R]			-> Reset the map`
+
+`[C]			-> Colorize image fdf`
+
+`[B][N]			-> Zoom in and zoom out`
+
+`[J][K]			-> Modify Altitude`
+
+`[Space]			-> Change the camera (isocetric <-> plain)`
+
+`[W][A][S][D]		-> Move the map`
+
 ### Executing
 
 To execute the program:
